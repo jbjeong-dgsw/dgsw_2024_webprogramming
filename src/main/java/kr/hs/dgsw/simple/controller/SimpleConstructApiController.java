@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SimpleConstructApiController {
 
-    private final GreetingService greetingService;
+   private final GreetingService greetingService;
 
     /*
     public SimpleConstructApiController(GreetingService greetingService) {
