@@ -8,6 +8,8 @@ public class Person {
 
     private String email;
 
+    private int age;
+
     public int getIdx() {
         return idx;
     }
@@ -30,5 +32,13 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 }
