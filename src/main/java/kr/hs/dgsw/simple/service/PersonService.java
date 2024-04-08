@@ -8,4 +8,7 @@ public interface PersonService {
 
     public Person readPerson(int idx);
 
+    public Person updatePerson(Person person);
+
+
 }

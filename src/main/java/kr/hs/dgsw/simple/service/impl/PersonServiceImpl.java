@@ -34,4 +34,16 @@ public class PersonServiceImpl implements PersonService {
 
         throw new RuntimeException("Not Found");
     }
+
+    @Override
+    public Person updatePerson(Person person) {
+        Person saved = readPerson(person.getIdx());
+
+        saved.setName(person.getName());
+        saved.setEmail(person.getEmail());
+        saved.setAge(person.getAge());
+
+        return saved;
+    }
+
 }

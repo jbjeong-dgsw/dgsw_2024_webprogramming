@@ -48,12 +48,19 @@ public class PersonController {
         return personService.addPerson(person);
     }
 
-    @GetMapping(value = "/person-body/{idx}")
+    @GetMapping(value = "/person/{idx}")
     public Person readPerson(@PathVariable(value = "idx") int idx) {
         LoggerFactory.getLogger(getClass()).info("/person GET 호출됨  {}  ",
                 idx);
 
         return personService.readPerson(idx);
+    }
+
+    @PutMapping("/person/{idx}")
+    public Person updatePerson(@PathVariable(value = "idx") int idx,
+                               @RequestBody Person person) {
+        person.setIdx(idx);
+        return personService.updatePerson(person);
     }
 
 }
