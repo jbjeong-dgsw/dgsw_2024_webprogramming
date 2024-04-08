@@ -1,5 +1,8 @@
 package kr.hs.dgsw.simple.domain;
 
+import lombok.ToString;
+
+@ToString
 public class Person {
 
     private int idx;
@@ -7,6 +10,8 @@ public class Person {
     private String name;
 
     private String email;
+
+    private String photo;
 
     private int age;
 
@@ -40,5 +45,13 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }
