@@ -11,8 +11,6 @@ public class Person {
 
     private String email;
 
-    private String photo;
-
     private int age;
 
     public int getIdx() {
@@ -47,11 +45,4 @@ public class Person {
         this.age = age;
     }
 
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
 }

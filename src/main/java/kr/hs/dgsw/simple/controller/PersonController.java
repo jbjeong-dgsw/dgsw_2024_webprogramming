@@ -54,29 +54,6 @@ public class PersonController {
         return personService.addPerson(person);
     }
 
-    @PostMapping(value = "/person-file")
-    public Person addPersonWithFile(@RequestPart(value = "person") Person person,
-                                    @RequestPart(value = "photo") MultipartFile photo) {
-
-        LoggerFactory.getLogger(getClass()).info("person - {}", person);
-        LoggerFactory.getLogger(getClass()).info("photo - {}", photo);
-
-        if (photo != null) {
-            File file = new File("/Users/batang/Developments/files/gbsw",
-                    photo.getOriginalFilename());
-            try {
-                photo.transferTo(file);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            // 서버에 photo 파일을 저장한다.
-            person.setPhoto(photo.getOriginalFilename());
-        }
-
-        return personService.addPerson(person);
-    }
-
     @GetMapping(value = "/person/{idx}")
     public Person readPerson(@PathVariable(value = "idx") int idx) {
         LoggerFactory.getLogger(getClass()).info("/person GET 호출됨  {}  ",
@@ -85,11 +62,15 @@ public class PersonController {
         return personService.readPerson(idx);
     }
 
-    @PutMapping("/person/{idx}")
+    @PutMapping(value = "/person/{idx}")
     public Person updatePerson(@PathVariable(value = "idx") int idx,
                                @RequestBody Person person) {
+
         person.setIdx(idx);
-        return personService.updatePerson(person);
+        personService.updatePerson(person);
+
+        return null;
     }
+
 
 }
