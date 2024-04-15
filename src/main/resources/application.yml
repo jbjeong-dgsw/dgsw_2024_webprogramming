@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://www.mhaa.kr:3306/gbsw_2024
+    username: gbsw
+    password: gbsw0415!!
