@@ -2,6 +2,7 @@ package kr.hs.dgsw.simple.controller;
 
 import kr.hs.dgsw.simple.domain.Person;
 import kr.hs.dgsw.simple.service.PersonService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -9,8 +10,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 @RestController
+@Slf4j
 public class PersonController {
 
     private final PersonService personService;
@@ -50,6 +53,27 @@ public class PersonController {
 
         LoggerFactory.getLogger(getClass()).info("/person POST 호출됨  {} {}  ",
                 person.getName(), person.getEmail());
+
+        return personService.addPerson(person);
+    }
+
+    @PostMapping(value = "/person-file")
+    public Person addPersonFile(@RequestPart(value = "person") Person person,
+                                @RequestPart(value = "file") MultipartFile multipartFile) {
+        try {
+            String fileName = multipartFile.getOriginalFilename();
+
+            File file = new File("/Users/batang/Developments/files/" + fileName);
+            multipartFile.transferTo(file);
+
+            person.setFilePath(file.getAbsolutePath());
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+
+        LoggerFactory.getLogger(getClass()).info("/person POST 호출됨  {} {}  ",
+                person, multipartFile);
+
 
         return personService.addPerson(person);
     }
