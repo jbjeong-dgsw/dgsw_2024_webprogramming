@@ -10,5 +10,10 @@ public interface PersonRepository extends JpaRepository<PersonEntity, Integer> {
 
     public List<PersonEntity> findAllByEmail(String email);
 
-    public Optional<PersonEntity> findByName(String name);
+    public List<PersonEntity> findAllByEmailContaining(String email);
+
+    public List<PersonEntity> findAllByName(String name);
+
+    public List<PersonEntity> findAllByEmailAndName(String email, String name);
+
 }

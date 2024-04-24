@@ -60,7 +60,7 @@ public class PersonServiceByDatabase implements PersonService {
 
     @Override
     public List<Person> readPerson(String email) {
-        List<PersonEntity> list = personRepository.findAllByEmail(email);
+        List<PersonEntity> list = personRepository.findAllByEmailContaining(email);
         List<Person> result = new ArrayList<>();
 
         for (PersonEntity entity : list) {

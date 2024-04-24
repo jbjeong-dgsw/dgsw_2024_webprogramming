@@ -96,5 +96,11 @@ public class PersonController {
         return null;
     }
 
+    @GetMapping("/person-email")
+    public List<Person> readPerson(@RequestParam(value = "email") String email) {
+        List<Person> list = personService.readPerson(email);
+
+        return list;
+    }
 
 }
