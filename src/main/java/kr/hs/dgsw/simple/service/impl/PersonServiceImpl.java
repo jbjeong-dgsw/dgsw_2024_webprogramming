@@ -45,4 +45,9 @@ public class PersonServiceImpl implements PersonService {
 
         return saved;
     }
+
+    @Override
+    public List<Person> readPerson(String email) {
+        return null;
+    }
 }

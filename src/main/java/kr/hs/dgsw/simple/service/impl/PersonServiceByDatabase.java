@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -54,5 +56,24 @@ public class PersonServiceByDatabase implements PersonService {
     @Override
     public Person updatePerson(Person person) {
         return null;
+    }
+
+    @Override
+    public List<Person> readPerson(String email) {
+        List<PersonEntity> list = personRepository.findAllByEmail(email);
+        List<Person> result = new ArrayList<>();
+
+        for (PersonEntity entity : list) {
+            Person person = new Person();
+            person.setIdx(entity.getIdx());
+            person.setName(entity.getName());
+            person.setEmail(entity.getEmail());
+            person.setAge(entity.getAge());
+            person.setFilePath(entity.getFilePath());
+
+            result.add(person);
+        }
+
+        return result;
     }
 }
