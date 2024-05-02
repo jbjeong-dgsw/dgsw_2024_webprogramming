@@ -4,32 +4,26 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "writing")
-public class WritingEntity {
+@Table(name = "reply")
+public class ReplyEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int writingIdx;
+    private int replyIdx;
 
-    private String title;
+    @Column(name = "writing_idx")
+    private int writingIdx;
 
     private String content;
 
     private String writer;
 
-    private String fileName;
-
     private Date writeTime;
-
-    @OneToMany
-    @JoinColumn(name = "writing_idx")
-    private List<ReplyEntity> replies;
 }

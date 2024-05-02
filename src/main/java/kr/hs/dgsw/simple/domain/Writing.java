@@ -1,9 +1,12 @@
 package kr.hs.dgsw.simple.domain;
 
+import kr.hs.dgsw.simple.entity.ReplyEntity;
 import kr.hs.dgsw.simple.entity.WritingEntity;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -24,8 +27,12 @@ public class Writing {
 
     private Date writeTime;
 
+    private List<Reply> replies;
+
+
+
     public static Writing toDomain(WritingEntity entity) {
-        return Writing.builder()
+        Writing writing = Writing.builder()
                 .writingIdx(entity.getWritingIdx())
                 .title(entity.getTitle())
                 .content(entity.getContent())
@@ -33,5 +40,10 @@ public class Writing {
                 .fileName(entity.getFileName())
                 .writeTime(entity.getWriteTime())
                 .build();
+
+        List<Reply> list = entity.getReplies().stream().map(Reply::toDomain).toList();
+        writing.setReplies(list);
+
+        return writing;
     }
 }
