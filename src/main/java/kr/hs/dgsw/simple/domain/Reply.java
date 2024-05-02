@@ -31,4 +31,14 @@ public class Reply {
                 .writeTime(entity.getWriteTime())
                 .build();
     }
+
+    public static ReplyEntity toEntity(Reply domain) {
+        return ReplyEntity.builder()
+                .replyIdx(domain.getReplyIdx())
+                .writingIdx(domain.getWritingIdx())
+                .content(domain.getContent())
+                .writer(domain.getWriter())
+                .writeTime(domain.getWriteTime())
+                .build();
+    }
 }

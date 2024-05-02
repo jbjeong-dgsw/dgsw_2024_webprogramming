@@ -31,5 +31,6 @@ public class WritingEntity {
 
     @OneToMany
     @JoinColumn(name = "writing_idx")
+    @OrderBy("reply_idx desc")
     private List<ReplyEntity> replies;
 }
