@@ -21,6 +21,25 @@ public class WritingController {
         return writingService.list(pageNumber);
     }
 
+    @GetMapping("/{idx}")
+    public Writing get(@PathVariable(value = "idx") int idx) {
+        return writingService.get(idx);
+    }
+
+    @DeleteMapping("/{idx}")
+    public void delete(@PathVariable(value = "idx") int idx) {
+        writingService.delete(idx);
+    }
+
+    @PostMapping("")
+    public Writing add(@RequestBody Writing writing) {
+        return writingService.add(writing);
+    }
+
+    @PutMapping("")
+    public Writing update(@RequestBody Writing writing) {
+        return writingService.update(writing);
+    }
 
     @PostMapping("/reply")
     public Reply addReply(@RequestBody Reply reply) {

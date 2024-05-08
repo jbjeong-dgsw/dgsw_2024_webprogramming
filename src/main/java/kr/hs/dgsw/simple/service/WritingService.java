@@ -8,6 +8,14 @@ public interface WritingService {
 
     public Page<Writing> list(int pageNumber);
 
+    public Writing get(int idx);
+
+    public Writing add(Writing writing);
+
+    public Writing update(Writing writing);
+
+    public void delete(int idx);
+
 
     public Reply addReply(Reply reply);
 }

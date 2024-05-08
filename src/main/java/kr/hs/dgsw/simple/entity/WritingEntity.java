@@ -27,9 +27,11 @@ public class WritingEntity {
 
     private String fileName;
 
+    @Column(updatable = false)
     private Date writeTime;
 
     @OneToMany
+    @Column(insertable = false, updatable = false)
     @JoinColumn(name = "writing_idx")
     @OrderBy("reply_idx desc")
     private List<ReplyEntity> replies;
