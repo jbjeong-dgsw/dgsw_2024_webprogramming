@@ -18,4 +18,6 @@ public interface WritingService {
 
 
     public Reply addReply(Reply reply);
+
+    public void deleteReply(int idx);
 }

@@ -80,4 +80,9 @@ public class WritingServiceImpl implements WritingService {
 
         return reply;
     }
+
+    @Override
+    public void deleteReply(int idx) {
+        replyRepository.deleteById(idx);
+    }
 }

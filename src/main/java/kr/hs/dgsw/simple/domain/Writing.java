@@ -40,9 +40,8 @@ public class Writing {
                 .writeTime(entity.getWriteTime())
                 .build();
 
-        //LoggerFactory.getLogger("zzz").info("[time] {} {}", entity, writing);
-        //List<Reply> list = entity.getReplies().stream().map(Reply::toDomain).toList();
-        //writing.setReplies(list);
+        List<Reply> list = entity.getReplies().stream().map(Reply::toDomain).toList();
+        writing.setReplies(list);
 
         return writing;
     }

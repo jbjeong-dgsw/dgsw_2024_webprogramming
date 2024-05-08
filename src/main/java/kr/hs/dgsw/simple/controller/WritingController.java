@@ -46,4 +46,8 @@ public class WritingController {
         return writingService.addReply(reply);
     }
 
+    @DeleteMapping("/reply/{idx}")
+    public void deleteReply(@PathVariable(value = "idx") int idx) {
+        writingService.deleteReply(idx);
+    }
 }
