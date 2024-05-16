@@ -11,26 +11,15 @@ public class MyUserDetails implements UserDetails {
 
     private final User user;
 
-    public MyUserDetails(final User user) {
+    public MyUserDetails(User user) {
         this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = null;
-
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        if (user.getGrade() >= 1) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
-        }
 
-        if (user.getGrade() >= 5) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        }
-
-        if (user.getGrade() >= 9) {
-            authorities.add(new SimpleGrantedAuthority("ROLE_SUPERVISOR"));
-        }
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
 
         return authorities;
     }
@@ -62,10 +51,6 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return "N".equals(user.getWithdrawedYn());
-    }
-
-    public User getUser() {
-        return user;
+        return true;
     }
 }

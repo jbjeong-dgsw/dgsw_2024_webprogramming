@@ -10,12 +10,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class CommonConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
 
-    @Bean
+    //@Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
             throws Exception {
         return authenticationConfiguration.getAuthenticationManager();

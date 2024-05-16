@@ -18,7 +18,7 @@ public class UserController {
 
     private final UserService userService;
 
-    private final AuthenticationManager authenticationManager;
+    //private final AuthenticationManager authenticationManager;
 
     @PostMapping("")
     public User addUser(@RequestBody User user) {
@@ -31,7 +31,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/login")
+    /*@GetMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest) {
         LoginResponse loginResponse = new LoginResponse();
 
@@ -55,5 +55,7 @@ public class UserController {
 
         return loginResponse;
     }
+
+     */
 
 }
