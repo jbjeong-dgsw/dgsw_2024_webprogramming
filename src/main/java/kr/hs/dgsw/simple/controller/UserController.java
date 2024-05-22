@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,7 +19,7 @@ public class UserController {
 
     private final UserService userService;
 
-    //private final AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
     @PostMapping("")
     public User addUser(@RequestBody User user) {
@@ -31,9 +32,10 @@ public class UserController {
     }
 
 
-    /*@GetMapping("/login")
+    @GetMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest) {
         LoginResponse loginResponse = new LoginResponse();
+        log.info("LOGIN {}", loginRequest);
 
         try {
             AbstractAuthenticationToken authenticationToken =
@@ -42,6 +44,12 @@ public class UserController {
 
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
+            authentication.getDetails();
+            log.info("  getName {}", authentication.getName());
+            log.info("  getDetails {}", authentication.getDetails());
+            log.info("  getPrincipal {}", authentication.getPrincipal());
+            log.info("  getCredentials {}", authentication.getPrincipal());
+
             loginResponse.setResult("success");
         } catch (LockedException e) {
             loginResponse.setResult("locked");
@@ -49,13 +57,15 @@ public class UserController {
             loginResponse.setResult("bad credential");
         } catch (DisabledException e) {
             loginResponse.setResult("disabled");
-        } catch (Exception e) {
+        } catch (UsernameNotFoundException e) {
+            loginResponse.setResult("Not registered");
+        }
+        catch (Exception e) {
+            log.error(e.getMessage(), e);
             loginResponse.setResult("fail");
         }
 
         return loginResponse;
     }
-
-     */
 
 }
