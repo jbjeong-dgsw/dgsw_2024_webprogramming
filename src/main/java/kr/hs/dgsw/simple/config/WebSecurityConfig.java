@@ -27,7 +27,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/person/**").permitAll()
                         .requestMatchers("/index.html").permitAll()
                         .requestMatchers("/user/login").permitAll()
-                        .anyRequest().authenticated());
+                        .anyRequest().permitAll());
 
         //http.formLogin(form -> form.permitAll());
 

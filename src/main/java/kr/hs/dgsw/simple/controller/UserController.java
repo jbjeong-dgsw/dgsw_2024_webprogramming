@@ -1,5 +1,7 @@
 package kr.hs.dgsw.simple.controller;
 
+import kr.hs.dgsw.simple.config.JwtTokenProvider;
+import kr.hs.dgsw.simple.config.JwtTokenProvider1;
 import kr.hs.dgsw.simple.domain.LoginRequest;
 import kr.hs.dgsw.simple.domain.LoginResponse;
 import kr.hs.dgsw.simple.domain.User;
@@ -8,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +24,8 @@ public class UserController {
 
     private final AuthenticationManager authenticationManager;
 
+    private final JwtTokenProvider jwtTokenProvider;
+
     @PostMapping("")
     public User addUser(@RequestBody User user) {
         return userService.addUser(user);
@@ -32,7 +37,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest) {
         LoginResponse loginResponse = new LoginResponse();
         log.info("LOGIN {}", loginRequest);
@@ -44,13 +49,14 @@ public class UserController {
 
             Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
-            authentication.getDetails();
-            log.info("  getName {}", authentication.getName());
-            log.info("  getDetails {}", authentication.getDetails());
-            log.info("  getPrincipal {}", authentication.getPrincipal());
-            log.info("  getCredentials {}", authentication.getPrincipal());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            String jwtToken = jwtTokenProvider.createToken(authentication);
 
             loginResponse.setResult("success");
+            loginResponse.setToken(jwtToken);
+
+
         } catch (LockedException e) {
             loginResponse.setResult("locked");
         } catch (BadCredentialsException e) {
