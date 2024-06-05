@@ -1,7 +1,6 @@
 package kr.hs.dgsw.simple.controller;
 
 import kr.hs.dgsw.simple.config.JwtTokenProvider;
-import kr.hs.dgsw.simple.config.JwtTokenProvider1;
 import kr.hs.dgsw.simple.domain.LoginRequest;
 import kr.hs.dgsw.simple.domain.LoginResponse;
 import kr.hs.dgsw.simple.domain.User;
