@@ -1,6 +1,5 @@
 package kr.hs.dgsw.simple.config;
 
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +16,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class JwtFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -25,17 +24,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        String token = request.getHeader("Authorization");
 
-        boolean valid = jwtTokenProvider.validateToken(token);
-        if (valid) {
-            // Authentication을 생성한다.
-            Authentication authentication = jwtTokenProvider.createAuthentication(token);
+        String jwt = request.getHeader("Authorization");
+        log.info("JwtFilter is called - {}", jwt);
 
-            // SecurityContextHolder 에 넣어준다.
+        if (jwtTokenProvider.validateToken(jwt)) {
+            Authentication authentication = jwtTokenProvider.createAuthentication(jwt);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 
         filterChain.doFilter(request, response);
+
     }
 }
